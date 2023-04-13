@@ -296,43 +296,7 @@ async function verifyGoogleAccessToken(token) {
  
 };
 
-//@desc apple auth
-//@route POST /users/appleauth
-//@access public
-const appleAuth = async (req, res) => {
-  try {
-    const { id_token } = req.body;
-    const client = new OAuth2Client(process.env.APPLE_CLIENT_ID);
-    const response = await client.verifyIdToken({
-      idToken: id_token,
-      audience: process.env.APPLE_CLIENT_ID,
-    });
-    const { email_verified, email, username } = response.payload;
-    if (email_verified) {
-      res.status(200).json({ success: true, data: { email, username } });
-    }
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
-  }
-};
 
-//@desc facebook auth
-//@route POST /users/facebookauth
-//@access public
-
-const facebookAuth = async (req, res) => {
-  try {
-    const { accessToken, userID } = req.body;
-    const url = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`;
-    const response = await fetch(url, {
-      method: "GET",
-    });
-    const data = await response.json();
-    res.status(200).json({ success: true, data });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
-  }
-};
 
 //@desc logout user
 //@route GET /users/logout
