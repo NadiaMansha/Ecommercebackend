@@ -9,8 +9,6 @@ const {
   loginUser,
   forgotPassword,
   googleAuth,
-  appleAuth,
-  facebookAuth,
   logoutUser,
 } = require("../controllers/userController");
 
