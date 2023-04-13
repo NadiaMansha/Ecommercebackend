@@ -321,8 +321,6 @@ module.exports = {
   forgotPasswordRequest,
   resetPassword,
   googleAuth,
-  appleAuth,
-  facebookAuth,
   logoutUser,
 
 };
